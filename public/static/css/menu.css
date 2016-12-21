@@ -1,0 +1,78 @@
+/* 
+ * First eliminate margin at top and left side of the page 
+ * by setting defaults to 0px for all elements 
+ */
+
+* {
+   margin: 0px;
+   padding: 0px; 
+}
+
+body { 
+    font: 14px verdana;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #cccccc;
+    height: 50px;
+    text-align: center;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    padding: 17px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #2479f7;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #dddddd;
+    min-width: 110px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 16px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #2479f7;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#bbslogo {
+	height: 50px;
+	width: 147px;
+    padding: 0px;
+}	 
+
+#bbslogo:hover {
+	height: 50px;
+	width: 147px;
+	outline: 1px solid #2479f7;
+	outline-offset: -4px;
+    padding: 0px;
+}	 
