@@ -1,13 +1,16 @@
 
 /*
- * GET /main page
+ * /main page
  */
 
 var express = require('express');
 var router = express.Router();
 
 router.get('/main', function(req, res) {
+
 	var portnum = req.app.get('port');
+	var config = req.app.get('config');
+
 	res.send(`  <!-- This is a template literal containing almost the whole page. -->  
 	
 		<!DOCTYPE HTML>
@@ -21,128 +24,18 @@ router.get('/main', function(req, res) {
 			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 			<script type="text/javascript" src="./static/jquery-1.7.1.min.js"></script>
-			<!-- <script type="text/javascript" src="./static/jquery-1.11.1.js"></script> -->
 			<script type="text/javascript" src="./static/jquery.dropmenu-1.1.4.js"></script>
 			<script type="text/javascript" src="./static/menu.js"></script>
 
-
-			<script type="text/javascript"> 
-				var userEnteredItem = false;
-				var userEnteredComment = false;
-				var numitems = 0;
-		
-				$("document").ready(function() {
-
-//					$.ajax("http://localhost:3000/curitems", 
-					$.ajax("/curitems", 
-							{ success: setContent, type: "GET", dataType: "json" });
-					
-					$("#itemnameinput").val("Enter item name").css("color","lightgray");
-					$("#qtyinput").val("1").css("color","lightgray");					
-					$("#commentinput").val("Optional comments").css("color","lightgray");					
-					$("#addbutton").click(additem);
-					$("#clearlist").click(clearlist);
-					$("#itemnameinput").keypress(function(event) {
-						/* 
-						 * On first character entered, set field color to black and 
-						 * enter default quantity of "1".  However, if the character
-						 * entered is <CR>, do nothing. 
-						 */
-						if (!userEnteredItem && (event.keyCode !== 13)) {
-							$("#itemnameinput").val("").css("color","black");
-							userEnteredItem = true; 
-							$("#qtyinput").val("1").css("color","black");
-						}
-					})
-					$("#itemnameinput").focus();
-					$("#commentinput").keypress(function() {
-						if (!userEnteredComment) {
-							$("#commentinput").val("").css("color","black");
-							userEnteredComment = true; 
-						}
-					});
-					/* 
-					 * If user enters <CR>, treat it as if they hit Add Item button
-					 * unless there's nothing been entered to be added.
-					 */
-					$("#itemnameinput").keyup(function(event){
-						if ((event.keyCode === 13) && userEnteredItem)
-						{
-							$("#addbutton").click();
-						}
-					});
-					$("#qtyinput").keyup(function(event){
-						if ((event.keyCode === 13) && userEnteredItem)
-						{
-							$("#addbutton").click();
-						}
-					});
-					$("#commentinput").keyup(function(event){
-						if ((event.keyCode === 13) && userEnteredItem)
-						{
-							$("#addbutton").click();
-						}
-					});
-				});
-		
-				function setContent(data, status, jqxhr) {
-					console.log(data.allitems);
-					var curitems = data.allitems;
-					for (i=0; i<curitems.length; i++) {
-						$(".itemtable").append('<TR class=\"itemrow\"><TD>' + curitems[i].item + "</TD><TD>" + curitems[i].quantity + "</TD><TD>" + curitems[i].comments + "</TD></TR>");            	
-						numitems += 1;
-					}
-					if (numitems === 0) { 
-						$(".itemtable").append('<TR class=\"itemrow\"><TD>Empty List</TD></TR>'); 
-					}
-				}
-
-				function additem(data, status, jqxhr) {
-					var userinput = $("#itemnameinput").val();
-					if (!userEnteredItem) {
-						$("#itemnameinput").css("color","red")
-					} else {
-						var newItemName = $("#itemnameinput").val();
-						var newQty = $("#qtyinput").val();
-						var newComment;
-						if (userEnteredComment) {
-							newComment = $("#commentinput").val();
-						} else {
-							newComment = "";
-						}
-						if (numitems === 0) {
-							$(".itemrow").remove();
-						}
-						$(".itemtable").append('<TR class=\"itemrow\"><TD>' + newItemName + "</TD><TD>" + newQty + "</TD><TD>" + newComment + "</TD></TR>");
-						$("#itemnameinput").val("Enter item name").css("color","lightgray");
-						userEnteredItem=false;
-						$("#qtyinput").val("1").css("color","lightgray");
-						$("#commentinput").val("Optional comments").css("color","lightgray");
-						userEnteredComment=false;
-						numitems += 1; 
-						$("#itemnameinput").focus();
-					}
-				} 
-				
-				function clearlist(data, status, jqxhr) {
-					$(".itemrow").remove();
-					numitems = 0; 
-					$(".itemtable").append('<TR class=\"itemrow\"><TD>Empty List</TD></TR>'); 
-					$("#itemnameinput").focus();
-				}			
-
-			</script>
-
 		</head>
 		<body>
-		<div class="page">
-			<ul>
-			    <li><a id="bbslogo" href="http://www.linkedin.com/in/donblair10" target="_blank">
+			<ul class="menu-ul">
+			    <li class="menu-li"><a id="bbslogo" href="/main">
 			    	<img src="./static/images/bbs sm don blair copyrighted.jpg">
 			    </a></li>
-			    <li><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
-			    <li><a href="/main">Current List</a></li>
-			    <li class="dropdown"><a href="/faves" class="dropbtn">Faves</a>
+			    <li class="menu-li"><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
+			    <li class="menu-li"><a href="/curlist">Current List</a></li>
+			    <li class="menu-dropdown"><a href="/faves" class="dropbtn">Faves</a>
 			        <div class="dropdown-content">
 			            <a href="/faves">Master List</a>
 			            <a href="/faves">Dad's</a>
@@ -152,43 +45,51 @@ router.get('/main', function(req, res) {
 			            <a href="/faves">David's</a>
 			        </div>
 			    </li>
-			    <li><a href="/notification">Notifications</a></li>
+			    <li class="menu-li"><a href="/notification">Notifications</a></li>
 			</ul>
 
-			<DIV class="pagetitle">Current Grocery List</DIV>
-			<TABLE id="mainitemtable">
-			<TBODY class="itemtable">
-			<TR class="itemcolumnheader">
-				<TD class="itemcolumnheader">Item</TD> 
-				<TD class="itemcolumnheader">Qty</TD> 
-				<TD class="itemcolumnheader">Notes</TD>
-			</TR>
-			</TBODY>
-			</TABLE>
+			<DIV class="pagetitle">Blair's Grocery Shopping List</DIV>
+				<div class="maindiv">
+					<div class="bluetitle">
+					A web app to help families collaboratively manage the family grocery 
+					shopping list.  
+					</div>
+		
+					<p>Features:
+					<ul class="main-ul">
+					<li class="main-li">Easy to create and update the family grocery shopping list.</li>
+					<li class="main-li">All family members can see & update the list from anywhere, anytime.</li>
+					<li class="main-li">Works on laptops or mobile devices.</li>					
+					<li class="main-li">Runs in the cloud, nothing installed on the client.</li>					
+					<li class="main-li">Kids can text Mom & Dad directly from the app
+					    to let them know of latebreaking changes</li>
+					</ul>
+					</p>
+				
+					<p>Technologies: 
+					<ul class="main-ul">
+					<li class="main-li">App hosted in the cloud on Amazon Linux EC2 instance. </li>
+					<li class="main-li">Back end using NodeJS, ExpressJS and JSON. </li>
+					<li class="main-li">SMS Text messages using AWS Simple Notification Service (SNS)</li>					
+					<li class="main-li">Front end using	HTML5, CSS, JavaScript, jQuery, and Google's customizable icon library.</li>
+					<li class="main-li">Dynamic drop-down menus using CSS</li>
+					<li class="main-li">Aweseome Boulder Brook Software graphic by Jeb Blair!</li>
+					</p>
+		
+					<p>Limitations:
+					<ul class="main-ul">
+					<li class="main-li">No authentication yet, anyone can access the app.</li>
+					<li class="main-li">Dummy data, not hooked up to a database on the back end yet</li>
+					<li class="main-li">Favorites not implemented yet, will make it easy for each family member to select items from their own list. </li>
+					</ul>
+					</p>
+				</div>
 
-			<DIV class="buttonbar">
-				<button id="addbutton" class="btn btn-sm btn-success">Add Item</button>
-				<input type="text" id="itemnameinput" class="input-sm" value="">
-				<input type="text" id="qtyinput" class="input-sm" size="2" value="">
-				<input type="text" id="commentinput" class="input-sm" value="">
-				<p>
-				<button id="clearlist" class="btn btn-sm btn-success">Clear List</button>
 			</DIV>
-		</div>
 		</body>
 		</html>
 	
 	`); // End of the template literal. 
-});
-
-router.get('/main/:pebble', function(req, res) {
-	var portnum = req.app.get('port');
-	console.log('hostname ', req.hostname);
-	console.log('ip ', req.ip);
-	console.log('method ', req.method);
-	console.log('originalUrl', req.originalUrl);
-	console.log('params', req.params);
-	res.send('hello world00');
 });
 
 module.exports = router;
