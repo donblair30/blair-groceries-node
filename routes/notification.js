@@ -53,26 +53,43 @@ router.get('/notification', function(req, res) {
 				});
 		
 				function heydad(data, status, jqxhr) {
+					debugger;
+					var msg1 = document.getElementById("dadnotifyinput").value;
+
 					$.ajax("/notification", 
-							{ success: dadsuccess, type: "POST", dataType: "json" });
+							{ success: dadsuccess,
+							  error: dadfailure, 
+							  type: "POST", 
+							});
 				} 
 
 				function dadsuccess(data, status, jqxhr) {
-					console.log("It worked!");
-					$("#dadnotifyinput").val("Enter optional message for Dad").css("color","gray");
-					$("#errormessage").html("<p>This is a new error message </p>").css("display","block");
+					console.log("Notification success, response data = " + data);
+					$("#dadnotifyinput").val("Enter optional message for Dad").css("color","lightgray");
+					$("#successmessage").html("<p>Text message successfully scheduled using AWS.</p>").css("display","block");
+				};
+
+				function dadfailure(
+								jqXHR, // jQuery wrapper for XML Http Request object
+								status, // contains "error"
+								error) { // contains "Internal Server Error" or specific error returned
+					debugger;
+					var failureMsg = "Failure: " + error + ", " + jqXHR.responseText;
+					console.log(failureMsg);
+					$("#dadnotifyinput").val("Enter optional message for Dad").css("color","lightgray");
+					$("#errormessage").html("<p>" + failureMsg + "</p>").css("display","block");
 				};
 
 			</script>
 		</head>
 		<body>
-			<ul>
-			    <li><a id="bbslogo" href="http://www.linkedin.com/in/donblair10" target="_blank">
+			<ul class="menu-ul">
+			    <li class="menu-li"><a id="bbslogo" href="/main">
 			    	<img src="./static/images/bbs sm don blair copyrighted.jpg">
 			    </a></li>
-			    <li><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
-			    <li><a href="/main">Current List</a></li>
-			    <li class="dropdown"><a href="/faves" class="dropbtn">Faves</a>
+			    <li class="menu-li"><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
+			    <li class="menu-li"><a href="/curlist">Current List</a></li>
+			    <li class="menu-dropdown"><a href="/faves" class="dropbtn">Faves</a>
 			        <div class="dropdown-content">
 			            <a href="/faves">Master List</a>
 			            <a href="/faves">Dad's</a>
@@ -82,10 +99,12 @@ router.get('/notification', function(req, res) {
 			            <a href="/faves">David's</a>
 			        </div>
 			    </li>
-			    <li><a href="/notification">Notifications</a></li>
+			    <li class="menu-li"><a href="/notification">Notifications</a></li>
 			</ul>
+
 			<DIV class="pagetitle">Notifications</DIV>
 			<DIV id="errormessage"> Initial error message </DIV>
+			<DIV id="successmessage"> Initial success message </DIV>
 
 			<DIV class="buttonbar-no-top-margin">
 				<button id="dadbutton" class="btn btn-sm btn-success">Text to Dad</button>
@@ -102,21 +121,21 @@ router.get('/notification', function(req, res) {
 });
 
 router.post('/notification', function(req, res) {
-
 	var config = req.app.get('config');
-
-	//Create SNS client and pass in region.
 	var sns = new AWS.SNS({ region: config.AWS_REGION});
-	var snsMessage = 'Hey Dad! I updated the grocery list!';
-	sns.publish({ TopicArn: config.NEW_SIGNUP_TOPIC, Message: snsMessage }, function(err, data) {
+	var snsMessage = 'Hello world!';
+	sns.publish({ TopicArn: config.NEW_SIGNUP_TOPIC, 
+				  Message: snsMessage }, function(err, data) {
 		if (err) {
-		  console.log('Error publishing SNS message: ' + err);
+			console.log('Error publishing SNS message: ' + err);
+			res.status(500).send('Failure 8765 returned from AWS: err = ' + err); 
 		} else {
-		  console.log('SNS message sent 678.');
+			// How to get the original res object here, so I can call 
+			// res.status(200).send('It worked!') here  
+			console.log('It worked!');
+			res.status(200).send('Success returned from AWS');  // 
 		}
 	});
-
-	res.end('Yes');
 });
 
 module.exports = router;

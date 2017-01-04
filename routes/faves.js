@@ -29,13 +29,13 @@ router.get('/faves', function(req, res) {
 
 		</head>
 		<body>
-			<ul>
-			    <li><a id="bbslogo" href="http://www.linkedin.com/in/donblair10" target="_blank">
+			<ul class="menu-ul">
+			    <li class="menu-li"><a id="bbslogo" href="/main">
 			    	<img src="./static/images/bbs sm don blair copyrighted.jpg">
 			    </a></li>
-			    <li><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
-			    <li><a href="/main">Current List</a></li>
-			    <li class="dropdown"><a href="/faves" class="dropbtn">Faves</a>
+			    <li class="menu-li"><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
+			    <li class="menu-li"><a href="/curlist">Current List</a></li>
+			    <li class="menu-dropdown"><a href="/faves" class="dropbtn">Faves</a>
 			        <div class="dropdown-content">
 			            <a href="/faves">Master List</a>
 			            <a href="/faves">Dad's</a>
@@ -45,7 +45,7 @@ router.get('/faves', function(req, res) {
 			            <a href="/faves">David's</a>
 			        </div>
 			    </li>
-			    <li><a href="/notification">Notifications</a></li>
+			    <li class="menu-li"><a href="/notification">Notifications</a></li>
 			</ul>
 
 			<DIV class="pagetitle">Favorites</DIV>
