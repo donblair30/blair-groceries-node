@@ -32,9 +32,10 @@ p {
     display: none;
     position: absolute;
     background-color: #f2dede;
-    width: 250px;
+    width: 425px;
     height: 60px;
-    left: 450px;
+    left: 100px;
+    top: 150px;
     padding: 30px;
     overflow: visible; 
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
@@ -44,9 +45,10 @@ p {
     display: none;
     position: absolute;
     background-color: #ddffdd;
-    width: 250px;
+    width: 425px;
     height: 60px;
-    left: 450px;
+    left: 100px;
+    top: 150px;
     padding: 30px;
     overflow: visible; 
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
