@@ -9,7 +9,7 @@ You will need to create the following files in the root folder for the app.  The
 
 ## app_config.json
 { 
-  "AWS_REGION": "enter-aws-region-here", e.g. "us-west-2"
+  "AWS_REGION": "enter-aws-region-here", e.g. "us-west-2",
   "STARTUP_SIGNUP_TABLE": "this-can-be-empty-for-now",
   "NEW_SIGNUP_TOPIC": "enter-arn-for-topic-here"
 }
