@@ -22,10 +22,11 @@ router.get('/faves', function(req, res) {
 			<link rel="stylesheet" type="text/css" href="./static/css/menu.css" />
 			<link rel="stylesheet" type="text/css" href="./static/css/main.css" />
 			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+			<link rel="icon" href="./static/images/favicon.png"> 
 
 			<script type="text/javascript" src="./static/jquery-1.7.1.min.js"></script>
-			<script type="text/javascript" src="./static/jquery.dropmenu-1.1.4.js"></script>
-			<script type="text/javascript" src="./static/menu.js"></script>
+			<!-- <script type="text/javascript" src="./static/jquery.dropmenu-1.1.4.js"></script> -->
+			<!-- <script type="text/javascript" src="./static/menu.js"></script> --> 
 
 		</head>
 		<body>

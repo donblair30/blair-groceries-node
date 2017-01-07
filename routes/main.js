@@ -22,10 +22,11 @@ router.get('/main', function(req, res) {
 			<link rel="stylesheet" type="text/css" href="./static/css/menu.css" />
 			<link rel="stylesheet" type="text/css" href="./static/css/main.css" />
 			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+			<link rel="icon" href="./static/images/favicon.png"> 
 
 			<script type="text/javascript" src="./static/jquery-1.7.1.min.js"></script>
-			<script type="text/javascript" src="./static/jquery.dropmenu-1.1.4.js"></script>
-			<script type="text/javascript" src="./static/menu.js"></script>
+			<!-- <script type="text/javascript" src="./static/jquery.dropmenu-1.1.4.js"></script> -->
+			<!-- <script type="text/javascript" src="./static/menu.js"></script> --> 
 
 		</head>
 		<body>
@@ -61,7 +62,7 @@ router.get('/main', function(req, res) {
 					<li class="main-li">All family members can see & update the list from anywhere, anytime.</li>
 					<li class="main-li">Works on laptops or mobile devices.</li>					
 					<li class="main-li">Runs in the cloud, nothing installed on the client.</li>					
-					<li class="main-li">Kids can text Mom & Dad directly from the app
+					<li class="main-li">Kids can send Mom & Dad text messages & emails directly from the app
 					    to let them know of latebreaking changes</li>
 					</ul>
 					</p>
@@ -70,17 +71,22 @@ router.get('/main', function(req, res) {
 					<ul class="main-ul">
 					<li class="main-li">App hosted in the cloud on Amazon Linux EC2 instance. </li>
 					<li class="main-li">Back end using NodeJS, ExpressJS and JSON. </li>
-					<li class="main-li">SMS Text messages using AWS Simple Notification Service (SNS)</li>					
+					<li class="main-li">SMS Text messages and emails using AWS Simple Notification Service (SNS)</li>					
 					<li class="main-li">Front end using	HTML5, CSS, JavaScript, jQuery, and Google's customizable icon library.</li>
 					<li class="main-li">Dynamic drop-down menus using CSS</li>
-					<li class="main-li">Aweseome Boulder Brook Software graphic by Jeb Blair!</li>
+					<li class="main-li">Awesome Boulder Brook Software graphic by Jeb Blair!</li>
 					</p>
 		
 					<p>Limitations:
 					<ul class="main-ul">
 					<li class="main-li">No authentication yet, anyone can access the app.</li>
-					<li class="main-li">Dummy data, not hooked up to a database on the back end yet</li>
 					<li class="main-li">Favorites not implemented yet, will make it easy for each family member to select items from their own list. </li>
+					</ul>
+					</p>
+
+					<p>How to begin:
+					<ul class="main-ul">
+					<li class="main-li">Click on Current List in the navigation bar at the top of the page and go from there.</li>
 					</ul>
 					</p>
 				</div>
