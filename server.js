@@ -25,7 +25,6 @@ app.set('port', process.env.PORT || 3000);
 // app.set('view engine', 'jade');
 app.use(require('./routes/main'));
 app.use(require('./routes/curlist'));
-app.use(require('./routes/curitems'));
 app.use(require('./routes/notification'));
 app.use(require('./routes/faves'));
 app.use(express.static(path.join(__dirname, 'public')));
