@@ -65,6 +65,17 @@ router.get('/curlist', function(req, res) {
 				$("#commentinput").keyup(impliedAdd);
 			});
 	
+			function htmlEncode(value){
+			    //create a in-memory div, set its inner text (which jQuery automatically encodes)
+			    //then grab the encoded contents back out.  The div never exists on the page.
+			    //Thanks to http://stackoverflow.com/questions/1219860/html-encoding-in-javascript-jquery
+			    return $('<div/>').text(value).html();
+			}
+
+			function htmlDecode(value){
+			    return $('<div/>').html(value).text();
+			}
+
 			function getContent(data, status, jqxhr) {
 				curListObj = JSON.parse(data);
 				curListArray = curListObj.allitems;
@@ -98,13 +109,21 @@ router.get('/curlist', function(req, res) {
 					$("#itemnameinput").css("color","red")
 				} else {
 					var newItemName = $("#itemnameinput").val();
+					newItemName = htmlEncode(newItemName);
+					
 					var newQty = $("#qtyinput").val();
+					if (isNaN(newQty)) {
+						newQty = 1;
+					}
+					
 					var newComment;
 					if (userEnteredComment) {
 						newComment = $("#commentinput").val();
 					} else {
 						newComment = "";
 					}
+					newComment = htmlEncode(newComment);					
+
 					if (numitems === 0) {
 						$(".itemrow").remove();
 					}
