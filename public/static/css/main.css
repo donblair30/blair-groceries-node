@@ -1,11 +1,10 @@
+.fullpage {
+	margin: 10px 0px 0px 10px;
+}
+
 .pagetitle {
 	text-align: left;
 	font-size: 20px;
-	margin: 10px 10px 0px 10px;
-}
-
-div.maindiv {
-    margin: 5px 10px;
 }
 
 div.bluetitle {
@@ -14,6 +13,7 @@ div.bluetitle {
     width: 100%;
     height: 16px;
     padding: 2px;
+    margin-top: 4px;
 }
 
 ul.main-ul {
@@ -55,7 +55,6 @@ p {
 }
 
 #mainitemtable {
-	margin: 0px 0px 0px 10px;;
 	width: 100%;
 	overflow-x: auto;
 }
@@ -99,34 +98,32 @@ tr:nth-child(even) {
 	margin: 8px 5px 8px 0px;
 }
 
+.qtyfield {
+	text-align: center; 
+}
+
+.txtfield {
+	padding: 0px 0px 0px 5px;
+}
+
 #dadnotifyinput {
 	height: 1.72em; 
 	width: 20em;
 	font-size: 1em;
 	text-indent: 0.5em;
 	color: lightgray;
-	margin: 8px 5px 8px 0px;
-}
-
-#momnotifyinput {
-	height: 1.72em; 
-	width: 20em;
-	font-size: 1em;
-	text-indent: 0.5em;
-	color: lightgray;
-	margin: 8px 5px 8px 0px;
+	margin: 0px 5px 0px 0px;
 }
 
 button {
     font-size: 1em;
-    margin: 8px;
     padding: 0px 5px;
+    margin: 0px 5px 0px 0px; 
 	height: 2em;
 }
 
 button:hover {
     font-size: 1em;
-    margin: 8px;
     padding: 0px 5px;
 	height: 2em;
 	color: white; 
@@ -134,7 +131,7 @@ button:hover {
 }
 
 .buttonbar {
-	margin: 12px 0px;
+	margin: 12px 0px 0px 0px;
 }
 
 .buttonbar-no-top-margin {

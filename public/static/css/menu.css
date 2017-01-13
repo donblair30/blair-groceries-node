@@ -72,14 +72,10 @@ li.menu-dropdown:hover div.dropdown-content {
 }
 
 #bbslogo {
-	height: 50px;
-	width: 147px;
     padding: 0px;
 }	 
 
 #bbslogo:hover {
-	height: 50px;
-	width: 147px;
 	outline: 1px solid #2479f7;
 	outline-offset: -4px;
     padding: 0px;
