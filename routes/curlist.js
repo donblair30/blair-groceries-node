@@ -83,7 +83,7 @@ router.get('/curlist', function(req, res) {
 				numitems = 0; 
 				var i = 0;
 				for (i = 0; i < curListArray.length; i++) {
-					$(".itemtable").append('<TR class=\"itemrow\"><TD>' + curListArray[i].item + "</TD><TD>" + curListArray[i].quantity + "</TD><TD>" + curListArray[i].comments + "</TD></TR>");            	
+					$(".itemtable").append('<TR class=\"itemrow\"><TD class=\"txtfield\">' + curListArray[i].item + '</TD><TD class=\"qtyfield\">' + curListArray[i].quantity + '</TD><TD class=\"txtfield\">' + curListArray[i].comments + '</TD></TR>');            	
 					numitems += 1;
 				}
 				if (numitems === 0) { 
@@ -133,7 +133,7 @@ router.get('/curlist', function(req, res) {
 						comments: newComment
 					};
 					curListArray[curListArray.length] = newItem;
-					$(".itemtable").append('<TR class=\"itemrow\"><TD>' + newItemName + "</TD><TD>" + newQty + "</TD><TD>" + newComment + "</TD></TR>");
+					$(".itemtable").append('<TR class=\"itemrow\"><TD class=\"txtfield\">' + newItemName + '</TD><TD class=\"qtyfield\">' + newQty + '</TD><TD  class=\"txtfield\">' + newComment + '</TD></TR>');
 					$("#itemnameinput").val("Enter item name").css("color","lightgray");
 					userEnteredItem=false;
 					$("#qtyinput").val("1").css("color","lightgray");
@@ -181,46 +181,49 @@ router.get('/curlist', function(req, res) {
 
 	</head>
 	<body>
-	<div class="page">
-		<ul class="menu-ul">
-			<li class="menu-li"><a id="bbslogo" href="/main">
-				<img src="./static/images/bbs sm don blair copyrighted.jpg">
-			</a></li>
-			<li class="menu-li"><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
-			<li class="menu-li"><a href="/curlist">Current List</a></li>
-			<li class="menu-dropdown"><a href="/faves" class="dropbtn">Faves</a>
-				<div class="dropdown-content">
-					<a href="/faves">Master List</a>
-					<a href="/faves">Dad's</a>
-					<a href="/faves">Mom's</a>
-					<a href="/faves">Peter's</a>
-					<a href="/faves">Michael's</a>
-					<a href="/faves">David's</a>
-				</div>
-			</li>
-			<li class="menu-li"><a href="/notification">Notifications</a></li>
-		</ul>
+	<!-- Main navigation bar / menu --> 
+	<ul class="menu-ul">
+		<li class="menu-li"><a id="bbslogo" href="/main">
+			<img src="./static/images/bbs sm don blair copyrighted.jpg" style="height:50px;width:147px;" alt="sample logo">
+		</a></li>
+		<li class="menu-li"><a href="/main" style="padding: 13px 16px 10px;"><i class="material-icons">home</i></a></li>     
+		<li class="menu-li"><a href="/curlist">Current List</a></li>
+		<li class="menu-dropdown"><a href="/faves" class="dropbtn">Faves</a>
+			<div class="dropdown-content">
+				<a href="/faves">Master List</a>
+				<a href="/faves">Dad's</a>
+				<a href="/faves">Mom's</a>
+				<a href="/faves">Peter's</a>
+				<a href="/faves">Michael's</a>
+				<a href="/faves">David's</a>
+			</div>
+		</li>
+		<li class="menu-li"><a href="/notification">Notifications</a></li>
+	</ul>
 
-		<DIV class="pagetitle">Current List</DIV>
-		<TABLE id="mainitemtable">
-		<TBODY class="itemtable">
-		<TR class="itemcolumnheader">
-			<TD class="itemcolumnheader">Item</TD> 
-			<TD class="itemcolumnheader">Qty</TD> 
-			<TD class="itemcolumnheader">Notes</TD>
-		</TR>
-		</TBODY>
-		</TABLE>
+	<!-- Main page -- everything below the navigation bar --> 
+	<div class="fullpage">
+		<div class="pagetitle">Current List</DIV>
+		<table id="mainitemtable">
+		<tbody class="itemtable">
+		<tr class="itemcolumnheader">
+			<td class="itemcolumnheader">Item</td> 
+			<td class="itemcolumnheader">Qty</td> 
+			<td class="itemcolumnheader">Notes</td>
+		</tr>
+		</tbody>
+		</table>
 
-		<DIV class="buttonbar">
+		<div class="buttonbar">
 			<button id="addbutton" class="btn btn-sm btn-success">Add Item</button>
 			<input type="text" id="itemnameinput" class="input-sm" value="">
 			<input type="text" id="qtyinput" class="input-sm" size="2" value="">
 			<input type="text" id="commentinput" class="input-sm" value="">
-			<p>
+		</div>		
+		<div class="buttonbar">
 			<button id="clearlist" class="btn btn-sm btn-success">Clear List</button>
 			<button id="resetlist" class="btn btn-sm btn-success">Reset to Default List</button>
-		</DIV>
+		</div>
 	</div>
 	</body>
 	</html>
