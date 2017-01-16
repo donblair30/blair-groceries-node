@@ -44,7 +44,7 @@ var db = new AWS.DynamoDB({region: config.AWS_REGION});
 var sns = new AWS.SNS({ region: config.AWS_REGION});
 
 //GET home page.
-//app.get('/', routes.main);
+app.get('/', routes.index);
 
 //POST signup form.
 app.post('/signup', function(req, res) {
