@@ -110,7 +110,8 @@ router.get('/notification', function(req, res) {
 
 	<!-- Main page -- everything below the navigation bar --> 
 	<div class="fullpage">
-		<div class="pagetitle">Notifications</div>
+		<h1>Notifications</h1>
+		
 		<div id="errormessage"> Empty error message </div>
 		<div id="successmessage"> Empty success message </div>
 

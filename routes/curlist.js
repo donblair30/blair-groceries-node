@@ -83,11 +83,11 @@ router.get('/curlist', function(req, res) {
 				numitems = 0; 
 				var i = 0;
 				for (i = 0; i < curListArray.length; i++) {
-					$(".itemtable").append('<TR class=\"itemrow\"><TD class=\"txtfield\">' + curListArray[i].item + '</TD><TD class=\"qtyfield\">' + curListArray[i].quantity + '</TD><TD class=\"txtfield\">' + curListArray[i].comments + '</TD></TR>');            	
+					$(".itemtable").append('<tr class=\"itemrow\"><td>' + curListArray[i].item + '</td><td class=\"qtyfield\">' + curListArray[i].quantity + '</td><td>' + curListArray[i].comments + '</td></tr>');            	
 					numitems += 1;
 				}
 				if (numitems === 0) { 
-					$(".itemtable").append('<TR class=\"itemrow\"><TD>Empty List</TD><TD></TD><TD></TD></TR>'); 
+					$(".itemtable").append('<tr class=\"itemrow\"><td>Empty List</td><td></td><td></td></tr>'); 
 				}
 				$("#itemnameinput").focus();
 			}
@@ -133,7 +133,7 @@ router.get('/curlist', function(req, res) {
 						comments: newComment
 					};
 					curListArray[curListArray.length] = newItem;
-					$(".itemtable").append('<TR class=\"itemrow\"><TD class=\"txtfield\">' + newItemName + '</TD><TD class=\"qtyfield\">' + newQty + '</TD><TD  class=\"txtfield\">' + newComment + '</TD></TR>');
+					$(".itemtable").append('<tr class=\"itemrow\"><td>' + newItemName + '</td><td class=\"qtyfield\">' + newQty + '</td><td>' + newComment + '</td></tr>');
 					$("#itemnameinput").val("Enter item name").css("color","lightgray");
 					userEnteredItem=false;
 					$("#qtyinput").val("1").css("color","lightgray");
@@ -203,7 +203,7 @@ router.get('/curlist', function(req, res) {
 
 	<!-- Main page -- everything below the navigation bar --> 
 	<div class="fullpage">
-		<div class="pagetitle">Current List</DIV>
+		<h1>Current List</h1>
 		<table id="mainitemtable">
 		<tbody class="itemtable">
 		<tr class="itemcolumnheader">
@@ -232,6 +232,11 @@ router.get('/curlist', function(req, res) {
 });
 
 router.get('/curlist-data', function(req, res) {
+
+	//debugger;	
+	//var patt = /(\n|\t| )/g; 
+	//var d1 = currentList.replace(patt,"x");  // Strip whitespace
+
 	res.status(200).json(currentList);
 });
 
