@@ -30,6 +30,8 @@ router.get('/faves', function(req, res) {
 				$.ajax("/faves-data", 
 						{ success: getContent, type: "GET", dataType: "json" });
 				$("#selectall").change(selectAllItems);    
+				$("#addselected").click(addItems);
+
 			});
     
 			function getContent(data, status, jqxhr) {
@@ -38,7 +40,7 @@ router.get('/faves', function(req, res) {
 				numitems = 0; 
 				var i = 0;
 				for (i = 0; i < curListArray.length; i++) {
-					$(".itemtable").append('<tr class=\"itemrow\"><td class=\"checkboxfield\"><input type="checkbox"></td><td class="itemclass">' + curListArray[i].item + '</td></tr>');            	
+					$(".itemtable").append('<tr class=\"itemrow\"><td style="width:12px;"><input type="checkbox" class=\"checkboxfield\"></td><td class="itemclass">' + curListArray[i].item + '</td></tr>');            	
 					numitems += 1;
 				}
 				if (numitems === 0) { 
@@ -58,11 +60,51 @@ router.get('/faves', function(req, res) {
 			 * If the user checks the checkbox in top row, check all the items in the list
 			 */
 			function selectAllItems(event) {
-				debugger;				
 				var isChecked = this.checked;
-				$(".checkboxfield").checked = isChecked;
+				var allCheckboxes = document.getElementsByClassName("checkboxfield");
+				var j = 0;
+				for (j = 0; j < allCheckboxes.length; j++)
+				{
+					allCheckboxes[j].checked = isChecked;
+				}
+				/* The following doesn't work -- not sure why: */
+				/* $(".checkboxfield").checked = isChecked; */
 			}
-			
+
+			/* 
+			 * Find all the checked items and add them to the current list.  
+			 */
+			function addItems(event) {
+				var allCheckboxes = document.getElementsByClassName("checkboxfield");
+				var allItems = document.getElementsByClassName("itemclass");
+				var newItems = []; // Array of faves to be added to the current list
+				var n = 0;
+				for (n = 0; n < allCheckboxes.length; n++) {
+					if (allCheckboxes[n].checked) {
+						newItems[newItems.length] = {						
+							item: allItems[n].innerHTML,
+							quantity: 1,
+							comments: ""
+						};						
+					};
+				};
+				if (newItems.length > 0) {
+					var newItemsString = JSON.stringify(newItems);
+					$.ajax( { url: "/curlist-append",
+							  type: "POST", 
+							  data: {str1: newItemsString},
+							  success: function(data, textStatus) {
+							 		console.log('added fave');
+									if (data.redirect) {
+										// data.redirect contains the string URL to redirect to
+										window.location.href = data.redirect;
+									}
+							  },
+							  error: function() { console.log('failure added fave') }, 
+							}
+					);
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -101,7 +143,7 @@ router.get('/faves', function(req, res) {
 		</table>
 
 		<div class="buttonbar">
-			<button id="addbutton" class="btn btn-sm btn-success">Add Selected Items to Current List</button>
+			<button id="addselected" class="btn btn-sm btn-success">Add Selected Items to Current List</button>
 		</div>		
 	</div>
 

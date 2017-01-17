@@ -84,11 +84,12 @@ router.get('/main', function(req, res) {
 		<p>Limitations:
 		<ul class="main-ul">
 		<li class="main-li">No authentication yet, anyone can access the app.</li>
-		<li class="main-li">Favorites not implemented yet, will make it easy for each family member to select items from their own list. </li>
+		<li class="main-li">Works on mobile, but doesn't look good yet.</li>
+		<li class="main-li">Only one favorites page implemented, the rest coming soon!</li>
 		</ul>
 		</p>
 
-		<p>How to begin:
+		<p style="background-color:yellow;">How to begin:
 		<ul class="main-ul">
 		<li class="main-li">Click on Current List in the navigation bar at the top of the page and go from there.</li>
 		</ul>

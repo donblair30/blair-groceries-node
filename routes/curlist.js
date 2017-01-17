@@ -255,4 +255,18 @@ router.post('/curlist', function(req, res) {
 	res.status(200).send("success!");	
 });
 
+router.post('/curlist-append', function(req, res) {
+	var appendList = req.body.str1;
+	var appendListObj = JSON.parse(appendList);
+	var currentListObj = JSON.parse(currentList);
+	var k = 0;
+	for (k = 0; k < appendListObj.length; k++) {
+		currentListObj.allitems[currentListObj.allitems.length] = appendListObj[k];
+	}
+	currentList = JSON.stringify(currentListObj);
+	fs.writeFileSync('data/current_list.json', currentList, 'utf8');
+	var r1 = {redirect: "/curlist"};
+	res.status(200).json(r1);	
+});
+
 module.exports = router;
