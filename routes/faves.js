@@ -60,15 +60,7 @@ router.get('/faves', function(req, res) {
 			 * If the user checks the checkbox in top row, check all the items in the list
 			 */
 			function selectAllItems(event) {
-				var isChecked = this.checked;
-				var allCheckboxes = document.getElementsByClassName("checkboxfield");
-				var j = 0;
-				for (j = 0; j < allCheckboxes.length; j++)
-				{
-					allCheckboxes[j].checked = isChecked;
-				}
-				/* The following doesn't work -- not sure why: */
-				/* $(".checkboxfield").checked = isChecked; */
+				$(".checkboxfield").attr("checked", this.checked);
 			}
 
 			/* 
@@ -94,9 +86,8 @@ router.get('/faves', function(req, res) {
 							  type: "POST", 
 							  data: {str1: newItemsString},
 							  success: function(data, textStatus) {
-							 		console.log('added fave');
 									if (data.redirect) {
-										// data.redirect contains the string URL to redirect to
+										// redirect browser to the Current List page. 
 										window.location.href = data.redirect;
 									}
 							  },
